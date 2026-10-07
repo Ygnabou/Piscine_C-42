@@ -1,0 +1,78 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.vorpc.acceso",
+  "serialNumber": "MCSQZMADQWT6",
+  "teamIdentifier": "TEAMIDXXXX",
+  "organizationName": "VORPC",
+  "description": "VORPC Acceso y Fichaje — Yasser Gnabou",
+  "logoText": "VORPC",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(78, 184, 178)",
+  "labelColor": "rgb(232, 250, 248)",
+  "barcode": {
+    "message": "MCSQZMADQWT6",
+    "format": "PKBarcodeFormatCode128",
+    "messageEncoding": "iso-8859-1",
+    "altText": "MCSQZMADQWT6"
+  },
+  "barcodes": [
+    {
+      "message": "MCSQZMADQWT6",
+      "format": "PKBarcodeFormatCode128",
+      "messageEncoding": "iso-8859-1",
+      "altText": "MCSQZMADQWT6"
+    }
+  ],
+  "generic": {
+    "headerFields": [
+      {
+        "key": "header",
+        "label": "ACCESO",
+        "value": "Y FICHAJE"
+      }
+    ],
+    "primaryFields": [
+      {
+        "key": "name",
+        "label": "EMPLEADO",
+        "value": "Yasser Gnabou"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "title",
+        "label": "CARGO",
+        "value": "Marketplace Manager"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "code",
+        "label": "CÓDIGO",
+        "value": "MCSQZMADQWT6"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "org",
+        "label": "Empresa",
+        "value": "VORPC"
+      },
+      {
+        "key": "role",
+        "label": "Rol",
+        "value": "Empleado"
+      },
+      {
+        "key": "access-code",
+        "label": "Código de acceso / fichaje",
+        "value": "MCSQZMADQWT6"
+      },
+      {
+        "key": "note",
+        "label": "Nota",
+        "value": "Tarjeta digital de acceso y fichaje. Muestre el código de barras al lector."
+      }
+    ]
+  }
+}

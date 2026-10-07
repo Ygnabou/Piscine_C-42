@@ -1,0 +1,6 @@
+node_modules/
+dist/
+certs/*.pem
+certs/*.p12
+certs/*.cer
+.DS_Store

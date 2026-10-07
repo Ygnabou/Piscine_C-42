@@ -1,0 +1,15 @@
+{
+  "name": "vorpc-wallet-pass",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Apple Wallet (.pkpass) for VORPC access badge — Yasser Gnabou",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-pass.mjs",
+    "build:unsigned": "node scripts/build-pass.mjs --unsigned",
+    "serve": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "passkit-generator": "^3.5.7"
+  }
+}

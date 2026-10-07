@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="VORPC Acceso" />
+  <link rel="apple-touch-icon" href="carlos.r@example.net" />
+  <title>VORPC — Acceso y Fichaje</title>
+  <style>
+    :root {
+      --teal: #4eb8b2;
+      --teal-deep: #3a9e9a;
+      --ink: #121417;
+      --muted: #6b7280;
+      --line: #e6e8eb;
+      --bg: #eef3f4;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(120% 80% at 10% 0%, rgba(78, 184, 178, 0.28), transparent 55%),
+        radial-gradient(90% 70% at 100% 100%, rgba(70, 150, 170, 0.22), transparent 50%),
+        var(--bg);
+      color: var(--ink);
+    }
+    .wrap {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px 40px;
+    }
+    .card {
+      width: min(100%, 380px);
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.7) inset,
+        0 24px 60px rgba(20, 40, 45, 0.18);
+      animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      background: linear-gradient(90deg, var(--teal), #56b0c4);
+      color: #fff;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 1.35rem;
+    }
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .header-meta {
+      text-align: right;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
+      opacity: 0.95;
+    }
+    .body {
+      padding: 28px 24px 12px;
+      text-align: center;
+    }
+    .photo {
+      width: min(72%, 240px);
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 18px;
+      margin: 0 auto 18px;
+      display: block;
+      animation: fade 0.9s ease 0.15s both;
+    }
+    .role {
+      color: var(--teal-deep);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+    .title {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .footer {
+      margin-top: 28px;
+      padding: 20px 16px 28px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    #barcode {
+      width: min(100%, 300px);
+      height: 84px;
+    }
+    .code {
+      margin: 10px 0 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .hint {
+      width: min(100%, 380px);
+      margin-top: 18px;
+      color: #3d4a4d;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      text-align: center;
+      animation: fade 0.8s ease 0.35s both;
+    }
+    .hint strong { color: var(--ink); }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" aria-label="Tarjeta VORPC Acceso y Fichaje">
+      <header class="header">
+        <div class="brand">
+          <img src="logo-source.png" alt="VORPC" />
+          <span>VORPC</span>
+        </div>
+        <div class="header-meta">ACCESO<br />Y FICHAJE</div>
+      </header>
+      <div class="body">
+        <img class="photo" src="photo-source.png" alt="Yasser Gnabou" />
+        <p class="role">EMPLEADO</p>
+        <h1>Yasser Gnabou</h1>
+        <p class="title">Marketplace Manager</p>
+      </div>
+      <div class="footer">
+        <svg id="barcode" role="img" aria-label="Código de barras MCSQZMADQWT6"></svg>
+        <p class="code">MCSQZMADQWT6</p>
+      </div>
+    </article>
+    <p class="hint">
+      <strong>Para Apple Wallet:</strong> hace falta firmar el archivo <code>.pkpass</code>
+      con un certificado Pass Type ID de Apple Developer (ver README).
+      Mientras tanto, añade esta página a la pantalla de inicio (Compartir → Añadir a pantalla de inicio)
+      para usarla como tarjeta digital con el mismo código de barras.
+    </p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script>
+    JsBarcode("#barcode", "MCSQZMADQWT6", {
+      format: "CODE128",
+      displayValue: false,
+      margin: 0,
+      height: 84,
+      width: 2,
+      background: "transparent",
+      lineColor: "#111"
+    });
+  </script>
+</body>
+</html>
