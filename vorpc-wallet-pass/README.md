@@ -14,7 +14,9 @@ Digital **Acceso y Fichaje** pass for **Yasser Gnabou** (Marketplace Manager), b
 
 ## Add to Apple Wallet (real `.pkpass`)
 
-Apple only accepts **signed** passes. You need an [Apple Developer](https://developer.apple.com) account and a **Pass Type ID** certificate.
+**Read first:** [APPLE_WALLET.md](./APPLE_WALLET.md) — why unsigned files won’t install, and three ways to get a real Wallet card.
+
+Apple only accepts **signed** passes. You need an [Apple Developer](https://developer.apple.com) account (or VORPC’s corporate signer) and a **Pass Type ID** certificate.
 
 1. Put `signerCert.pem`, `signerKey.pem`, and `wwdr.pem` in `certs/` (see `certs/README.md`).
 2. Update `passTypeIdentifier` and `teamIdentifier` in `pass.json`.

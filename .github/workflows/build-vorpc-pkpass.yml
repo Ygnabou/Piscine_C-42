@@ -1,0 +1,71 @@
+name: Build VORPC Apple Wallet pass
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-pkpass:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: vorpc-wallet-pass
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: vorpc-wallet-pass/package-lock.json
+
+      - name: Validate secrets
+        run: |
+          missing=0
+          for s in APPLE_PASS_SIGNER_CERT APPLE_PASS_SIGNER_KEY APPLE_WWDR_CERT APPLE_TEAM_ID APPLE_PASS_TYPE_ID; do
+            if [ -z "${!s}" ]; then echo "::error::Missing secret $s"; missing=1; fi
+          done
+          [ "$missing" -eq 0 ]
+        env:
+          APPLE_PASS_SIGNER_CERT: ${{ secrets.APPLE_PASS_SIGNER_CERT }}
+          APPLE_PASS_SIGNER_KEY: ${{ secrets.APPLE_PASS_SIGNER_KEY }}
+          APPLE_WWDR_CERT: ${{ secrets.APPLE_WWDR_CERT }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_PASS_TYPE_ID: ${{ secrets.APPLE_PASS_TYPE_ID }}
+
+      - name: Install certificates
+        env:
+          APPLE_PASS_SIGNER_CERT: ${{ secrets.APPLE_PASS_SIGNER_CERT }}
+          APPLE_PASS_SIGNER_KEY: ${{ secrets.APPLE_PASS_SIGNER_KEY }}
+          APPLE_WWDR_CERT: ${{ secrets.APPLE_WWDR_CERT }}
+        run: |
+          mkdir -p certs
+          printf '%s\n' "$APPLE_PASS_SIGNER_CERT" > certs/signerCert.pem
+          printf '%s\n' "$APPLE_PASS_SIGNER_KEY" > certs/signerKey.pem
+          printf '%s\n' "$APPLE_WWDR_CERT" > certs/wwdr.pem
+
+      - name: Apply Team ID and Pass Type ID
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_PASS_TYPE_ID: ${{ secrets.APPLE_PASS_TYPE_ID }}
+        run: |
+          node <<'NODE'
+          import { readFileSync, writeFileSync } from "node:fs";
+          const p = JSON.parse(readFileSync("pass.json", "utf8"));
+          p.teamIdentifier = process.env.APPLE_TEAM_ID;
+          p.passTypeIdentifier = process.env.APPLE_PASS_TYPE_ID;
+          writeFileSync("pass.json", JSON.stringify(p, null, 2) + "\n");
+          NODE
+
+      - name: Build signed .pkpass
+        env:
+          PASS_KEY_PASSPHRASE: ${{ secrets.APPLE_PASS_KEY_PASSPHRASE }}
+        run: |
+          npm ci
+          npm run build
+          test -f dist/VORPC-Yasser-Gnabou.pkpass
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VORPC-Yasser-Gnabou.pkpass
+          path: vorpc-wallet-pass/dist/VORPC-Yasser-Gnabou.pkpass
